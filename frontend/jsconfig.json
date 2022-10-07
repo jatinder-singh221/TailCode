@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/public/*": [
+        "public/*"
+      ],
+      "@/components/*": [
+        "components/*"
+      ],
+      "@/provider/*": [
+        "provider/*"
+      ],
+      "@/helperes/*": [
+        "helpers/*"
+      ],
+      "@/redux/*": [
+        "redux/*"
+      ],
+    }
+  }
+}
