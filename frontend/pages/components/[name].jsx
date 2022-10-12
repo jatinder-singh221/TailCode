@@ -72,7 +72,7 @@ export default function Name() {
               return <NameList key={index} {...data} />
             }) : <li className='w-full h-screen flex py-10 col-span-4'>
               <div className='w-full space-y-10'>
-                <h1 className='text-center text-xl text-black font-medium dark:text-white'>No component Post Founded</h1>
+                <h1 className='text-center text-xl text-black font-medium dark:text-white'>{name} not founded</h1>
                 <div className='relative w-1/2 h-56 mx-auto'>
                   <Image src="/notfounded.svg" alt="emptypng" layout='fill' />
                 </div>

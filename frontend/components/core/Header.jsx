@@ -10,15 +10,15 @@ export default function Header({children}) {
         const current = ref.current
         if (scrollYHeight > windowHeight / 9)
             if ((window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches))
-                current?.classList.add("before:bg-white/10", "before:backdrop-blur-[110px]", "backdrop-filter")
+                current?.classList.add("before:bg-white/10", "before:backdrop-blur-[500px]", "backdrop-filter")
             else
-                current?.classList.add("before:bg-black/10", "before:backdrop-blur-[100px]", "backdrop-filter")
+                current?.classList.add("before:bg-black/10", "before:backdrop-blur-[500px]", "backdrop-filter")
 
         else
             if ((window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches))
-                current?.classList.remove("before:bg-white/10", "before:backdrop-blur-[100px]", "backdrop-filter")
+                current?.classList.remove("before:bg-white/10", "before:backdrop-blur-[500px]", "backdrop-filter")
             else
-                current?.classList.remove("before:bg-black/10", "before:backdrop-blur-[100px]", "backdrop-filter")
+                current?.classList.remove("before:bg-black/10", "before:backdrop-blur-[500px]", "backdrop-filter")
     }, [])
 
     useEffect(() => {

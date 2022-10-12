@@ -86,7 +86,7 @@ export default function Create() {
         },
         validationSchema: Blog,
         onSubmit: async (values) => {
-            const result = await blogTitleStatus(values.title)
+            const result = await blogTitleStatus(values.slug)
             switch (result) {
                 case 200:
                     form.setFieldError('title', 'title already in use')
@@ -107,8 +107,11 @@ export default function Create() {
                     })
                     switch (api.status) {
                         case 201:
-                            dispatch(UPDATE('Blog saved'))
-                            router.push(`/blogs/${values.slug}`)
+                            form.resetForm()
+                            setimage('')
+                            dispatch(UPDATE(`Blog created`))
+                            if (values.status === 'P')
+                                router.push(`/blogs/${values.slug}`)
                             break;
                         case 400:
                         case 404:
@@ -126,7 +129,7 @@ export default function Create() {
 
     const handleTitleToSlug = (e) => {
         if (e.target.value.length > 0) {
-            const slug = slugify(e.target.value)
+            const slug = slugify(e.target.value).toLowerCase().replace(/[^\w\s]/gi, '-')
             if (creatForm) {
                 form.handleBlur(e)
                 form.setFieldValue('slug', slug)
@@ -207,8 +210,7 @@ export default function Create() {
             })
             switch (api.status) {
                 case 200:
-                    router.push(`/blogs/${values.slug}`)
-                    dispatch(UPDATE('Blog updated'))
+                    dispatch(UPDATE(`updated`))
                     break;
                 case 400:
                 case 404:
@@ -234,18 +236,9 @@ export default function Create() {
         setslug(data.slug)
     }, [updateForm])
 
-    const handleDeletPost = useCallback((slug) => {
-        dispatch(DIALOG({
-            title: 'Caution',
-            description: 'Do you want to delete Blog'
-        }))
-        setslug(slug)
-    }, [dispatch])
-
-    const handleIndex = (value) => router.push(`/blogs/create?index=${value}`)
-
-    const handleOkOrCancel = async (bool) => {
-        if (bool === true) {
+    const handleDeletPost = useCallback(async (slug) => {
+        const confirmation = confirm('Do you want to delete blog')
+        if (confirmation) {
             try {
                 const api = await fetch(`/api/blog/${slug}`, {
                     method: 'DELETE',
@@ -254,7 +247,7 @@ export default function Create() {
                 switch (api.status) {
                     case 204:
                         loadUserBlogPost()
-                        dispatch(UPDATE('Blog Deleted'))
+                        dispatch(UPDATE(`Deleted successfully`))
                         dispatch(DIALOG(null))
                         break;
                     case 400:
@@ -266,10 +259,10 @@ export default function Create() {
             } catch (error) {
                 router.push('/500')
             }
-        } else {
-            dispatch(DIALOG(null))
         }
-    }
+    }, [dispatch, loadUserBlogPost, router])
+
+    const handleIndex = (value) => router.push(`/blogs/create?index=${value}`)
 
     return (
         <>
@@ -323,7 +316,7 @@ export default function Create() {
                                         <span className='text-xs capitalize text-pink-600'>{form.touched.html && form.errors.html}</span>
                                     </p>
                                     <MdEditor renderHTML={text => mdParser.render(text)} onBlur={form.handleBlur} id='html' name='html' onChange={handleCreateHtmlChange}
-                                        className={`h-[500px] w-full outline-none bg-black/10 dark:bg-white/10 text-sm rounded-md  backdrop-filter backdrop-blur-2xl
+                                        className={`h-[700px] w-full outline-none bg-black/10 dark:bg-white/10 text-sm rounded-md  backdrop-filter backdrop-blur-2xl
                                         p-3 placeholder:text-sm text-black dark:text-white placeholder:text-black/50 dark:placeholder:text-white/50
                                         ${form.touched.html && form.errors.html ? 'border-b-2 border-pink-600 rounded-b-none' : 'focus:border-b-2 focus:rounded-none focus:rounded-t-md focus:border-[#2DAC9D]'}
                                         `}
@@ -345,17 +338,22 @@ export default function Create() {
                         </Tab.Panel>
                         <Tab.Panel>
                             <ul className="w-full space-y-5 mb-10 animate-show-out">
-                                <p className='text-2xl font-bold text-black dark:text-white'>My Blogs</p>
-                                {blog.results?.length > 0 ? blog.results.map((data, index) => {
-                                    return <BlogerList key={index} {...data} handleEditblogPost={handleEditblogPost} handleDeletPost={handleDeletPost} />
-                                }) : <div className='w-full h-full flex py-10'>
-                                    <div className='w-full space-y-10'>
-                                        <h1 className='text-sm text-black font-medium dark:text-white'>No Blog Post Founded</h1>
-                                        <div className='relative w-1/2 h-56 mx-auto'>
-                                            <Image src="/notfounded.svg" alt="emptypng" layout='fill' />
+                                {blog.results?.length > 0 ?
+                                    <>
+                                        <p className='text-2xl font-bold text-black dark:text-white'>My Blogs</p>
+                                        {blog.result.map((data, index) => {
+                                            return <BlogerList key={index} {...data} handleEditblogPost={handleEditblogPost} handleDeletPost={handleDeletPost} />
+                                        })}
+                                    </>
+                                    :
+                                    <div className='w-full h-[calc(100vh-9.5rem)] flex py-10 items-center justify-center'>
+                                        <div className='w-full space-y-10'>
+                                            <h1 className='text-center text-xl text-black font-medium dark:text-white'>Blogs not founded</h1>
+                                            <div className='relative w-1/2 h-56 mx-auto'>
+                                                <Image src="/notfounded.svg" alt="emptypng" layout='fill' />
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>}
+                                    </div>}
                             </ul>
                             <Pagination {...blog} page={page} setitems={setblog} url='/api/blog/list' />
                         </Tab.Panel>

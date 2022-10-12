@@ -5,11 +5,6 @@ import {
 
 export const navbarLinks = [
     {
-        name: 'Docs',
-        link: '/docs',
-        icon: DocumentIcon
-    },
-    {
         name: 'Components',
         link: '/components',
         icon: ColorSwatchIcon
@@ -32,11 +27,6 @@ export const navbarLinks = [
 ]
 
 export const appbarlink = [
-    {
-        name: 'Docs',
-        link: '/docs',
-        icon: DocumentIcon
-    },
     {
         name: 'Components',
         link: '/components',
@@ -69,11 +59,6 @@ export const barLinks = [
         icon: BellIcon,
         name: 'Notification',
         link: '/account/notification'
-    },
-    {
-        name: 'Docs',
-        link: '/docs',
-        icon: DocumentIcon
     },
     {
         icon: TicketIcon,

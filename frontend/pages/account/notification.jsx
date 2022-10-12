@@ -32,22 +32,25 @@ export default function Notifactions() {
       <Head>
         <title>TailCode | Notifications</title>
       </Head>
-      <h1 className='text-2xl text-black dark:text-white'>Notifications</h1>
       <ul className="w-full space-y-5 mb-10 animate-show-out">
-        {notifications.length > 0 ? notifications.map((data, index) => {
-          return <div className='w-full space-y-4 px-2 py-4 rounded-md' key={index}>
-            <h2 className='text-xl text-black dark:text-white font-medium'>{data.title}</h2>
-            <p className='text-sm text-black dark:text-white w-full lg:w-3/4'>{data.description}</p>
-            <mark className='inline-block px-2  rounded-sm text-xs'>{humanReadAbleData(data.dated)}</mark>
+        {notifications.length > 0 ? 
+        <>
+          <h1 className='text-2xl text-black dark:text-white'>Notifications</h1>
+         {notifications.map((data, index) => {
+            return <div className='w-full space-y-4 px-2 py-4 rounded-md' key={index}>
+              <h2 className='text-xl text-black dark:text-white font-medium'>{data.title}</h2>
+              <p className='text-sm text-black dark:text-white w-full lg:w-3/4'>{data.description}</p>
+              <mark className='inline-block px-2  rounded-sm text-xs'>{humanReadAbleData(data.dated)}</mark>
+            </div>})}
+        </>
+        :<div className='w-full h-[calc(100vh-10rem)] flex py-10 items-center justify-center'>
+        <div className='w-full space-y-10'>
+          <h1 className='text-center text-xl text-black font-medium dark:text-white'>No notifications</h1>
+          <div className='relative w-1/2 h-56 mx-auto'>
+            <Image src="/notfounded.svg" alt="emptypng" layout='fill' />
           </div>
-        }) : <div className='w-full h-full flex py-10'>
-          <div className='w-full space-y-10'>
-            <h1 className='text-xl text-black font-medium dark:text-white'>No Notifications</h1>
-            <div className='relative w-1/2 h-56 mx-auto'>
-              <Image src="/notfounded.svg" alt="emptypng" layout='fill' />
-            </div>
-          </div>
-        </div>}
+        </div>
+      </div>}
       </ul>
     </Layout>
   )

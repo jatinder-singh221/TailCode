@@ -46,26 +46,26 @@ export default function Search(props) {
         <Transition
             show={props.state}
             as={Fragment}
-            enter="transition-opacity ease-linear duration-300"
+            enter="transition-opacity ease-linear duration-150"
             enterFrom="opacity-0"
             enterTo="opacity-100"
-            leave="transition-opacity ease-linear duration-300"
+            leave="transition-opacity ease-linear duration-150"
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
+
         >
             <Dialog onClose={() => props.handleClose()} className='fixed top-0 left-0 p-3 backdrop-blur
                     h-screen w-full bg-black/10 dark:bg-white/10 backdrop-filter
-                    z-50 space-y-1' 
-            >
+                    z-50 space-y-1'>
                 <Dialog.Panel >
-                    <ArrowLeftIcon className='w-7 h-7 p-1 rounded-full hover:scale-105 active:bg-black/10 
-                    dark:active:bg-white/10 cursor-pointer text-black dark:text-white active:backdrop-blur backdrop-filter' onClick={handleClose} />
                     <Dialog.Description className='px-4 py-2 text-sm text-inherit w-full lg:w-1/2 mx-auto space-y-3 bg-white dark:bg-[#14181B]  rounded-md'>
                         <form className='w-full' onSubmit={handleSearchChange}>
                             <label htmlFor="search"
-                                className='flex h-10 items-center space-x-3  mx-auto px-3 text-sm 
+                                className='flex h-10 items-center space-x-3  mx-auto px-1 text-sm 
                                 '
                             >
+                                <ArrowLeftIcon className='w-7 h-7 p-1 rounded-full hover:scale-105 active:bg-black/10 
+                                dark:active:bg-white/10 cursor-pointer text-black dark:text-white active:backdrop-blur backdrop-filter' onClick={handleClose} />
                                 <input type="text" id='search' placeholder='Type something to search' value={searchString} onChange={(e) => setsearchString(e.target.value)}
                                     className='w-full h-full bg-transparent outline-none placeholder:text-black/50 dark:placeholder:text-white/50'
                                 />
@@ -75,7 +75,7 @@ export default function Search(props) {
                                 dark:active:bg-white/10 cursor-pointer text-black dark:text-white active:backdrop-blur backdrop-filter' onClick={handleSearchChange} />
                             </label>
                         </form>
-                        {result && <div className="h-[calc(100vh-30vh)] border-t border-[#2DAC9D] pt-2  w-full overflow-y-auto hidden-scrollbar space-y-4 ">
+                        {result && <div className="h-[calc(100vh-30vh)] border-t border-[#2DAC9D] py-2 overflow-y-auto hidden-scrollbar space-y-4 ">
                             {searchResult.length > 0 ? searchResult.map((data, index) => {
                                 return <ul key={index} className='relative'>
                                     <List {...data} />
@@ -94,5 +94,6 @@ export default function Search(props) {
                 </Dialog.Panel>
             </Dialog>
         </Transition>
+
     )
 }

@@ -92,8 +92,8 @@ export default function Help() {
                 <div className='space-y-3'>
                     <h1 className='text-2xl font-bold text-black dark:text-white mb-10'>Frequently asked question</h1>
                     <Disclosure as='div' className='rounded-md overflow-hidden text-black dark:text-white'>
-                        <Disclosure.Button className='flex items-center justify-between w-full p-2 text-lg bg-black/10 dark:bg-white/10'>
-                            Do you offer technical support?
+                        <Disclosure.Button className='flex items-center justify-between w-full p-2 text-sm bg-black/10 dark:bg-white/10'>
+                            How do i can start my new project
                             <ChevronRightIcon className="ui-open:rotate-90 ui-open:transform w-4 h-4" />
                         </Disclosure.Button>
                         <Transition
@@ -105,14 +105,20 @@ export default function Help() {
                             leaveTo="transform scale-95 opacity-0"
                         >
                             <Disclosure.Panel className='p-3 text-sm'>
-                                Yes! You can purchase a license that you can share with your entire
-                                team.
+                                <ul className='list-disc pl-4'>
+                                    <li>Create a account or if already have account singin </li>
+                                    <li>Enter name of project </li>
+                                    <li>Select from React and Nextjs </li>
+                                    <li>Done</li>
+                                    <li>Now a live window will be open for live testing</li>
+                                    <li>Delay will be there in code change</li>
+                                </ul>
                             </Disclosure.Panel>
                         </Transition>
                     </Disclosure>
                     <Disclosure as='div' className='rounded-md overflow-hidden text-black dark:text-white'>
-                        <Disclosure.Button className='flex items-center justify-between w-full p-2 text-lg bg-black/10 dark:bg-white/10'>
-                            Do you offer technical support?
+                        <Disclosure.Button className='flex items-center justify-between w-full p-2 text-sm bg-black/10 dark:bg-white/10'>
+                            Delay in Code change
                             <ChevronRightIcon className="ui-open:rotate-90 ui-open:transform w-4 h-4" />
                         </Disclosure.Button>
                         <Transition
@@ -124,50 +130,10 @@ export default function Help() {
                             leaveTo="transform scale-95 opacity-0"
                         >
                             <Disclosure.Panel className='p-3 text-sm'>
-                                Yes! You can purchase a license that you can share with your entire
-                                team.
+                                Dear user due to some restrication there will be delay of 10 to 20 sec delay after code save
                             </Disclosure.Panel>
                         </Transition>
                     </Disclosure>
-                    <Disclosure as='div' className='rounded-md overflow-hidden text-black dark:text-white'>
-                        <Disclosure.Button className='flex items-center justify-between w-full p-2 text-lg bg-black/10 dark:bg-white/10'>
-                            Do you offer technical support?
-                            <ChevronRightIcon className="ui-open:rotate-90 ui-open:transform w-4 h-4" />
-                        </Disclosure.Button>
-                        <Transition
-                            enter="transition duration-100 ease-out"
-                            enterFrom="transform scale-95 opacity-0"
-                            enterTo="transform scale-100 opacity-100"
-                            leave="transition duration-75 ease-out"
-                            leaveFrom="transform scale-100 opacity-100"
-                            leaveTo="transform scale-95 opacity-0"
-                        >
-                            <Disclosure.Panel className='p-3 text-sm'>
-                                Yes! You can purchase a license that you can share with your entire
-                                team.
-                            </Disclosure.Panel>
-                        </Transition>
-                    </Disclosure>
-                    <Disclosure as='div' className='rounded-md overflow-hidden text-black dark:text-white'>
-                        <Disclosure.Button className='flex items-center justify-between w-full p-2 text-lg bg-black/10 dark:bg-white/10'>
-                            Do you offer technical support?
-                            <ChevronRightIcon className="ui-open:rotate-90 ui-open:transform w-4 h-4" />
-                        </Disclosure.Button>
-                        <Transition
-                            enter="transition duration-100 ease-out"
-                            enterFrom="transform scale-95 opacity-0"
-                            enterTo="transform scale-100 opacity-100"
-                            leave="transition duration-75 ease-out"
-                            leaveFrom="transform scale-100 opacity-100"
-                            leaveTo="transform scale-95 opacity-0"
-                        >
-                            <Disclosure.Panel className='p-3 text-sm'>
-                                Yes! You can purchase a license that you can share with your entire
-                                team.
-                            </Disclosure.Panel>
-                        </Transition>
-                    </Disclosure>
-
                 </div>
             </main>
             <Footer />

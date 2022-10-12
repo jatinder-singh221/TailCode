@@ -1,5 +1,4 @@
 import { useState, useCallback, Fragment } from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { Dialog, Transition } from '@headlessui/react'
@@ -84,10 +83,10 @@ export default function Search(props) {
         <Transition
             show={props.state}
             as={Fragment}
-            enter="transition-opacity ease-linear duration-300"
+            enter="transition-opacity ease-linear duration-150"
             enterFrom="opacity-0"
             enterTo="opacity-100"
-            leave="transition-opacity ease-linear duration-300"
+            leave="transition-opacity ease-linear duration-150"
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
 
@@ -96,14 +95,14 @@ export default function Search(props) {
                     h-screen w-full bg-black/10 dark:bg-white/10 backdrop-filter
                     z-50 space-y-1'>
                 <Dialog.Panel >
-                    <ArrowLeftIcon className='w-7 h-7 p-1 rounded-full hover:scale-105 active:bg-black/10 
-                    dark:active:bg-white/10 cursor-pointer text-black dark:text-white active:backdrop-blur backdrop-filter' onClick={handleClose} />
                     <Dialog.Description className='px-4 py-2 text-sm text-inherit w-full lg:w-1/2 mx-auto space-y-3 bg-white dark:bg-[#14181B]  rounded-md'>
                         <form className='w-full' onSubmit={handleSearchChange}>
                             <label htmlFor="search"
-                                className='flex h-10 items-center space-x-3  mx-auto px-3 text-sm 
+                                className='flex h-10 items-center space-x-3  mx-auto px-1 text-sm 
                                 '
                             >
+                                <ArrowLeftIcon className='w-7 h-7 p-1 rounded-full hover:scale-105 active:bg-black/10 
+                                dark:active:bg-white/10 cursor-pointer text-black dark:text-white active:backdrop-blur backdrop-filter' onClick={handleClose} />
                                 <input type="text" id='search' placeholder='Type something to search' value={searchString} onChange={(e) => setsearchString(e.target.value)}
                                     className='w-full h-full bg-transparent outline-none placeholder:text-black/50 dark:placeholder:text-white/50'
                                 />

@@ -8,7 +8,7 @@ import Menuitems from '@/components/core/Menuitems'
 
 import { Menu } from '@headlessui/react'
 
-import { notification, user } from '@/redux/reducers/authSlice'
+import { user } from '@/redux/reducers/authSlice'
 import { barLinks } from '@/provider/provider.Links'
 import Header from '../core/Header'
 import { appbarlink } from "@/provider/provider.Links"

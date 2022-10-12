@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 
 import { useSelector } from "react-redux"
 import { authenciated, AUTHENCIATED } from "@/redux/reducers/authSlice"
-import {SearchIcon } from '@heroicons/react/outline'
+import { SearchIcon } from '@heroicons/react/outline'
 
 const Appbar = dynamic(() => import('@/components/Comman/Bar'))
 const Navbar = dynamic(() => import('@/components/Comman/Navbar'))
@@ -36,19 +36,20 @@ export default function Index(props) {
     let url = ''
     page > 1 ? url = `/blog/list?page=${page}` : url = '/blog/list'
 
-      const api = await fetchSsr(url)
-      switch (api.status) {
-        case 200:
-          const urlRes = await api.json()
-          setblog(urlRes)
-          setloading(false)
-          break;
-        case 400:
-        case 404:
-        case 429:
-        case 500:
-          router.push(`/${api.status}`)
-      }
+    const api = await fetchSsr(url)
+    switch (api.status) {
+      case 200:
+        const urlRes = await api.json()
+        setblog(urlRes)
+        console.log(urlRes);
+        setloading(false)
+        break;
+      case 400:
+      case 404:
+      case 429:
+      case 500:
+        router.push(`/${api.status}`)
+    }
   }, [router, page])
 
   useEffect(() => {
@@ -65,27 +66,33 @@ export default function Index(props) {
       </Head>
       {isAuthenciated ? <Appbar /> : <Navbar />}
       <main className="w-[95%] lg:w-[80%] min-h-screen mx-auto mt-14" id='top'>
-        <div className="h-10 w-full flex items-center justify-between space-x-3">
-          <p className='text-2xl font-bold text-black dark:text-white'>Blogs</p>
-          <SearchIcon className='w-7 h-7 p-1 rounded-full hover:scale-105 active:bg-black/10 
-          dark:active:bg-white/10 cursor-pointer text-black dark:text-white active:backdrop-blur backdrop-filter' onClick={() => setsearch(!search)} />
-        </div>
-        <Search  state={search} handleClose={() => setsearch(!search)} />
         {!loading ?
           <>
-            <ul className="w-full space-y-5 mb-10 animate-show-out my-3 min-h-screen">
-              {blog.results.length > 0 ? blog.results.map((data, index) => {
-                return <List key={index} {...data} />
-              }) : <li className='w-full h-screen flex py-10'>
+            {blog.results.length > 0 ?
+              <>
+                <div className="h-10 w-full flex items-center justify-between space-x-3">
+                  <p className='text-2xl font-bold text-black dark:text-white'>Blogs</p>
+                  <SearchIcon className='w-7 h-7 p-1 rounded-full hover:scale-105 active:bg-black/10 
+                dark:active:bg-white/10 cursor-pointer text-black dark:text-white active:backdrop-blur backdrop-filter' onClick={() => setsearch(!search)} />
+                </div>
+                <Search state={search} handleClose={() => setsearch(!search)} />
+                <ul className="w-full space-y-5 mb-10 animate-show-out my-3 min-h-screen">
+                  {blog.results.map((data, index) => {
+                    return <List key={index} {...data} />
+                  })}
+                  <Pagination {...blog} page={page} setitems={setblog} url={url} />
+                </ul>
+              </>
+              :
+              <li className='w-full h-[calc(100vh-5.5rem)] flex py-10 items-center justify-center'>
                 <div className='w-full space-y-10'>
-                  <h1 className='text-center text-xl text-black font-medium dark:text-white'>No Blog Post Founded</h1>
+                  <h1 className='text-center text-xl text-black font-medium dark:text-white'>Blogs not founded</h1>
                   <div className='relative w-1/2 h-56 mx-auto'>
                     <Image src="/notfounded.svg" alt="emptypng" layout='fill' />
                   </div>
                 </div>
-              </li>}
-            </ul>
-            <Pagination {...blog} page={page} setitems={setblog} url={url}/>
+              </li>
+            }
           </>
           : <Emptyloading />}
       </main>

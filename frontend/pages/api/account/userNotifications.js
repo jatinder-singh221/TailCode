@@ -15,6 +15,7 @@ export default async function handler(req, res) {
                 const apiRes = await api.json()
                 res.status(api.status).json(apiRes)
             }
+
             else res.status(api.status).end()
         } catch (error) {
             res.status(500).end()

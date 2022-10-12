@@ -94,7 +94,7 @@ export const authenciateUserApi = (credentials) => async (dispatch) => {
     switch (api.status) {
         case 200:
             dispatch(AUTHENCIATED(true))
-            dispatch(UPDATE('Signing in ....'))
+            dispatch(UPDATE(`Signing in as ${credentials.username} `))
             break;
         case 400:
         case 429:
@@ -181,7 +181,7 @@ export const updateBasicInfo = (values) => async (dispatch) => {
             case 200:
                 sessionStorage.removeItem('profile')
                 dispatch(userProfileInfo())
-                dispatch(UPDATE('BASIC INFO UPDATED'))
+                dispatch(UPDATE('Basic information updated'))
                 break;
             case 400:
             case 429:
@@ -203,7 +203,7 @@ export const updateContactInfo = (values) => async (dispatch) => {
             case 200:
                 sessionStorage.removeItem('profile')
                 dispatch(userProfileInfo())
-                dispatch(UPDATE('CONTACT INFO UPDATED'))
+                dispatch(UPDATE('Contact information updated'))
                 break;
             case 400:
             case 429:
@@ -273,9 +273,11 @@ export const userNotifications = () => async (dispatch, getState) => {
                     dispatch(NOTIFICATIONS(apiRes))
                     sessionStorage.setItem('notifications', JSON.stringify(apiRes))
                     break;
+                case 404:
+                    dispatch(NOTIFICATIONS([]))
+                    break;
                 case 400:
                 case 429:
-                case 404:
                 case 500:
                     dispatch(setRedirect(`/${api.status}`))
                     break;

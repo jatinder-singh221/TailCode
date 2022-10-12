@@ -30,7 +30,7 @@ export default function BlogerList(props) {
             </div>
             <div className="col-span-1 flex items-center justify-center">
                 <div className='h-20 w-20 lg:h-32 lg:w-32 relative rounded-sm overflow-hidden'>
-                    <Image src={props.banner} layout='fill' alt='banner' priority className='opacity-80'/>
+                    <Image src={props?.banner ? props?.banner : '/avtar.jpg'} layout='fill' alt='banner' priority className='opacity-80'/>
                 </div>
             </div>
         </li>

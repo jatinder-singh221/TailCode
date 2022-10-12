@@ -33,7 +33,7 @@ export default function Editform(props) {
             if (basicInfoForm.dirty){
                 dispatch(updateBasicInfo(value))
                 props.refer.current.click()
-            } else dispatch(UPDATE('No change occurs'))
+            } else dispatch(UPDATE('No changes detected'))
         }
     })
 
@@ -53,7 +53,7 @@ export default function Editform(props) {
             if (contactInfoForm.dirty){
                 dispatch(updateContactInfo(value))
                 props.refer.current.click()
-            } else dispatch(UPDATE('No change occurs'))
+            } else dispatch(UPDATE('No changes detected'))
         }
     })
 

@@ -18,11 +18,11 @@ export default function UpdateComponent() {
 
 
   return (
-    <div className="w-64 h-12 z-50 fixed bottom-0 left-2 select-none">
+    <div className="min-w-[16rem] max-w-[24rem] h-12 z-50 fixed top-[50%] left-[40%] select-none">
       <div className="h-10 bg-black/20 dark:bg-white/10
       backdrop-blur-2xl rounded-t-md flex items-center justify-between px-3 text-sm"
       >
-        <span className="text-black dark:text-white">{updation}</span>
+        <span className="text-black dark:text-white w-[85%] truncate">{updation}</span>
         <XIcon className="w-6 h-6 cursor-pointer active:scale-75 text-black hover:scale-105
       dark:text-white p-1 rounded-full active:bg-black/20 active:backdrop-blur dark:active:bg-white/20" onClick={handleClose}
         />

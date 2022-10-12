@@ -44,10 +44,14 @@ export default function Home() {
             Write code 2X faster with TailCode
           </h1>
           <p className='w-[90%] lg:w-1/2 text-center text-sm lg:text-xl text-black 
-          dark:text-white'>Using TailCode, you can build beautiful UI components,
-            customize them. Recreate them, and Redesign</p>
-          <div className='h-full aspect-video w-[80%]  rounded-md overflow-hidden relative'>
-            <video src="/home.mp4" autoPlay muted loop className='opacity-60'></video>
+          dark:text-white'>
+            <span className='mx-3 block font-bold'>
+              Customize,Recreate and Redesign
+            </span>
+            Using TailCode, you can build mordern website with UI components
+            </p>
+          <div className='h-full aspect-video w-[90%]  rounded-md overflow-hidden relative'>
+            <video src="/home.mp4" autoPlay muted loop></video>
           </div>
         </section>
 

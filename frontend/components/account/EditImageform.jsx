@@ -25,7 +25,7 @@ export default function Editform(props) {
             dispatch(updateUserProfile(formData))
             props.refer.current.click()
         }
-        else dispatch(UPDATE('No change detected'))
+        else dispatch(UPDATE('No changes detected'))
     }
 
     const handleImageUpload = (e) => {
