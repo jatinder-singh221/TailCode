@@ -48,10 +48,10 @@ export default function EditorComponentsSearch(props) {
         <Transition
             show={props.show === 2 ? true: false}
             as={Fragment}
-            enter="transition-opacity ease-linear duration-300"
+            enter="transition-opacity ease-linear duration-150"
             enterFrom="opacity-0"
             enterTo="opacity-100"
-            leave="transition-opacity ease-linear duration-300"
+            leave="transition-opacity ease-linear duration-150"
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
         >
@@ -88,7 +88,7 @@ export default function EditorComponentsSearch(props) {
                                                 <Link href={`/components/${data.catagory}`} passHref>
                                                     <a target='_blank' rel="noopener noreferrer">
                                                         <LinkIcon className='w-7 h-7 p-1 rounded-full hover:scale-105 active:bg-black/10 
-                                                    dark:active:bg-white/10 cursor-pointer text-black dark:text-white active:backdrop-blur backdrop-filter' onClick={() => clipToClipboard(data.code)} />
+                                                    dark:active:bg-white/10 cursor-pointer text-black dark:text-white active:backdrop-blur backdrop-filter' />
                                                     </a>
                                                 </Link>
                                             </div>

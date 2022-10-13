@@ -26,6 +26,8 @@ export default function EditorAside(props) {
 
     const treeData = useSelector(tree) ?? false
 
+
+
     const handleActiveTab = useCallback((index) => {
         const main = props.refrenceMain.current
         switch (index) {
@@ -64,19 +66,37 @@ export default function EditorAside(props) {
         }
     }, [activeTab, props, dispatch])
 
-    const handleEsc = useCallback((e) => {
-        if (e.key === 'Escape' && activeTab !== 0){
+    const handleShortCut = useCallback((e) => {
+        if (e.ctrlKey && e.key === 'G'){
+            e.preventDefault()
+            handleActiveTab(0)
+        }
+        else if (e.ctrlKey && e.key === 'K'){
+            e.preventDefault() 
+            handleActiveTab(1) 
+        }
+        else if (e.ctrlKey && e.key === 'U'){
+            e.preventDefault()
+            handleActiveTab(2)
+        }
+        else if (e.ctrlKey && e.key === 'Q'){
+            e.preventDefault()
+            handleActiveTab(3)
+
+        }
+        else if (e.key === 'Escape' && activeTab !== 0){
             handleActiveTab(activeTab)
         }
-    }, [ activeTab, handleActiveTab])
+    }, [handleActiveTab, activeTab])
+
 
     useEffect(() => {
-        document.addEventListener('keydown', handleEsc)
+        document.addEventListener('keydown', handleShortCut)
     
       return () => {
-        document.removeEventListener('keydown', handleEsc)
+        document.removeEventListener('keydown', handleShortCut)
       }
-    }, [handleEsc])
+    }, [handleShortCut])
     
 
     useEffect(() => {
@@ -114,7 +134,7 @@ export default function EditorAside(props) {
                 router.push('/500')
             }
         }
-    },[router, props])
+    },[router, props.playgroundId])
 
 
     useEffect(() => {
@@ -186,7 +206,7 @@ export default function EditorAside(props) {
                     })}
                 </ul>
             </section>
-            {activeTab === 0 && <section className='w-52 select-none py-4 space-y-4 transition-all z-10'>
+            {activeTab === 0 && <section className='w-56 select-none py-4 space-y-4 transition-all z-10'>
                 <p className='text-sm px-2'>Explorer</p>
                 <div className='relative'>
                     <details open ref={detailRef} className='overflow-auto'>

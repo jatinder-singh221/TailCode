@@ -244,14 +244,10 @@ class playgroundLCURDView(viewsets.ModelViewSet):
             return Response(postedData.errors, status = HTTP_400_BAD_REQUEST)
 
     def destroy(self, request, *args, **kwargs):
-        try:
-            user = request.user
-            object = self.get_object()
-            object.isDeleted = True
-            object.save()
-            return Response(status = HTTP_202_ACCEPTED)
-        except Exception:
-            return Response(status = HTTP_400_BAD_REQUEST)
+        object = self.get_object()
+        path = object.directory
+        shutil.rmtree(path, ignore_errors=False, onerror=None)
+        return super().destroy(request, *args, **kwargs)
 
 class checkPlaygroundName(APIView):
     permission_classes = [permissions.AllowAny]    

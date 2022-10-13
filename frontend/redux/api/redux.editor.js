@@ -345,7 +345,6 @@ export const deleteContainer = () => async (dispatch) => {
                     router.push(`/${api.status}`)
             }
         }
-        
     } catch (error) {
         dispatch(setRedirect('/500'))
     }

@@ -47,10 +47,10 @@ export default function EditorSettings(props) {
         <Transition
             show={props.show === 3 ? true : false}
             as={Fragment}
-            enter="transition-opacity ease-linear duration-300"
+            enter="transition-opacity ease-linear duration-150"
             enterFrom="opacity-0"
             enterTo="opacity-100"
-            leave="transition-opacity ease-linear duration-300"
+            leave="transition-opacity ease-linear duration-150"
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
         >

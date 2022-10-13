@@ -126,7 +126,7 @@ export default function Dashborad() {
       const location = `/api/${Name}/createProject`
       const api = await fetch(location, { ...DeletHeader, body: body })
       switch (api.status) {
-        case 202:
+        case 204:
           sessionStorage.removeItem('projects')
           loadUserProjects()
           dispatch(UPDATE('Project Deleted'))
