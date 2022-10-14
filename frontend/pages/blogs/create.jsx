@@ -341,7 +341,7 @@ export default function Create() {
                                 {blog.results?.length > 0 ?
                                     <>
                                         <p className='text-2xl font-bold text-black dark:text-white'>My Blogs</p>
-                                        {blog.result.map((data, index) => {
+                                        {blog.results.map((data, index) => {
                                             return <BlogerList key={index} {...data} handleEditblogPost={handleEditblogPost} handleDeletPost={handleDeletPost} />
                                         })}
                                     </>

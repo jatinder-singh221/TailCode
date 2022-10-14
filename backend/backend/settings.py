@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 from decouple import config
 from datetime import timedelta
-import dj_database_url
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -12,7 +12,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = ['tailcode.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = []
 
 
 # Application 
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'components.apps.ComponentsConfig',
     'playground.apps.PlaygroundConfig',
     'notification.apps.NotificationConfig',
+    'application.apps.ApplicationConfig',
 ]
 
 MIDDLEWARE = [
@@ -61,7 +62,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -88,9 +89,6 @@ DATABASES = {
         'HOST': 'localhost'
     }
 }
-
-db_from_env = dj_database_url.config(conn_max_age = 600)
-DATABASES['default'].update(db_from_env)
 
 # Cache 
 CACHES = {
@@ -139,7 +137,6 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
     ],
-
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated'
     ],
@@ -180,8 +177,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 
-STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, '/static')
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,'templates/styles')
+]
+STATIC_ROOT = os.path.join(BASE_DIR,'assests')
 
 # Media files
 MEDIA_URL = '/media/'

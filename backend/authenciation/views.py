@@ -13,13 +13,13 @@ from rest_framework import permissions
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, \
 HTTP_403_FORBIDDEN, HTTP_404_NOT_FOUND
 from rest_framework.response import Response
-from rest_framework.generics import CreateAPIView, UpdateAPIView
+from rest_framework.generics import CreateAPIView, UpdateAPIView, DestroyAPIView
 from rest_framework.parsers import FormParser, MultiPartParser
 
 from .models import otpModel, userProfile
 from .serilizers import userProfileSerializer, userRegisterSerializer, forgetPasswordSerializer, \
 basicInfoUserSerializer, contactInfoSerializer, \
-userProfileImageSerializer, passwordUpdateSerializer, helpSerializer
+userProfileImageSerializer, passwordUpdateSerializer, helpSerializer, baseUserSerializer
 
 class userProfileView(APIView):
 
@@ -180,4 +180,13 @@ class passwordUpdateView(UpdateAPIView):
 class helpView(CreateAPIView):
     serializer_class = helpSerializer
     permission_classes = [permissions.AllowAny]
+
+class deleteUserView(DestroyAPIView):
+    lookup_field = 'username'
+    queryset = User.objects.all()
+    serializer_class = baseUserSerializer
+
+    def get_object(self):
+        user = self.request.user
+        return user
 

@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tailcode | Sign In</title>
+    <link rel="stylesheet" href="{% static 'Login.css' %}">
+    <link rel="shortcut icon" href="{% static 'TailCode.ico' %}" type="image/x-icon">
+</head>
+<body>
+    <div class="form-wrapper">
+        <form action="" class="form" method="POST">
+            {% for message in messages %}
+                <div class="alert">{{message}}</div>
+            {% endfor %}
+            <img src="{% static 'TailCode.svg' %}" alt="logo" class="image">
+            {% csrf_token %}
+            <legend class="legend">Sign UP</legend>
+            <input class="input" placeholder="Username" type="email" id="username" name="username" value="{{username}}" required autofocus/>
+            <input class="input" placeholder="password" type="password" id="password" name="password" required/>
+            <button type="submi" class="button">Sign In</button>
+        </form>
+    </div>
+</body>
+</html>

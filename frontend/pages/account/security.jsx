@@ -10,7 +10,7 @@ const Button = dynamic(() => import('@/components/Comman/Button'))
 
 import { password, confirmPassword } from '@/provider/provider.Inputs'
 import { passwordUpdateValidation } from '@/provider/provider.Validations'
-import { updatePassword, sessionVerficiation } from '@/redux/api/redux.user'
+import { updatePassword, sessionVerficiation, signOutUser } from '@/redux/api/redux.user'
 import { updateButton } from '@/provider/provider.Buttons'
 import { AUTHENCIATED } from '@/redux/reducers/authSlice'
 import { wrapper } from '@/redux/store'
@@ -25,6 +25,27 @@ export default function Security() {
       dispatch(updatePassword(values))
     }
   })
+
+  const handleDeleteAccount = async () => {
+    const confirmation = confirm('Do you want to delete your account?')
+    if (confirmation){
+      const query = JSON.parse(sessionStorage.getItem('profile'))
+      const api = await fetch(`/api/account/${query.user.username}`, {
+        method: 'DELETE'
+      })
+      switch(api.status){
+        case 204:
+          dispatch(signOutUser())
+          router.push('/')
+          break;
+        case 400:
+        case 404:
+        case 500:
+          router.push(`/${api.status}`)
+          break;
+      }
+    }
+  }
 
 
   return (
@@ -51,7 +72,7 @@ export default function Security() {
         <header className='text-2xl text-red-500'>Danger Zone</header>
         <div className='flex items-center justify-between'>
           <p className='capitalize text-red-500 text-xs md:text-sm w-[60%]'>Do you want to delete your account</p>
-          <button className='flex items-center w-32 text-xs p-2 bg-red-400/10 cursor-pointer rounded-md text-red-400 active:scale-90'>
+          <button className='flex items-center w-32 text-xs p-2 bg-red-400/10 cursor-pointer rounded-md text-red-400 active:scale-90' onClick={handleDeleteAccount}>
             <TrashIcon className='w-4 h-4 mr-2' />
             Remove
           </button>

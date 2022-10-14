@@ -7,6 +7,7 @@ from django.conf import settings
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
+    path('', include('application.urls')),
     path(config('ADMIN'), admin.site.urls),
     path('obtain/token', TokenObtainPairView.as_view()),
     path('refresh/token', TokenRefreshView.as_view()),

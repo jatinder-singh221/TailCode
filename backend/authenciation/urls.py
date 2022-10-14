@@ -2,7 +2,7 @@ from django.urls import path
 
 from .views import userProfileView, forgetPasswordView, otpView, registerView, userAvaliable,  \
 forgetPasswordView, userProfileView, basicInfoUpdateView, \
-contactInfoUpdateView, profileImageUpdateView, passwordUpdateView, helpView
+contactInfoUpdateView, profileImageUpdateView, passwordUpdateView, helpView, deleteUserView
 
 urlpatterns = [
     path('profile', userProfileView.as_view()),
@@ -18,4 +18,5 @@ urlpatterns = [
     path('user/register', registerView.as_view()),
     path('user/forget', forgetPasswordView.as_view()),
     path('user/help', helpView.as_view()),
+    path('user/DeleteMyAccount/<str:username>', deleteUserView.as_view()),
 ]

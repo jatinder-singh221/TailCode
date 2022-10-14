@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tailcode | Admin</title>
+    <link rel="stylesheet" href="{% static 'Home.css' %}">
+    <link rel="shortcut icon" href="{% static 'TailCode.ico' %}" type="image/x-icon">
+</head>
+<body>
+    <nav class="nav">
+        <div class="logo">
+            <img src="{% static 'TailCode.svg' %}"", alt="logo" class="img"/>
+            <p class="txt">TailCode</p>
+        </div>
+        <ul class="nav">
+            <li>
+                <span class="span">WELCOME,</span>
+                <span class="spanBold">{{request.user.first_name}}{{ ' ' }}{{request.user.last_name}}</span>
+            </li>
+            <li>
+                <a href="/logout">Logout</a>
+            </li>
+        </ul>
+    </nav>
+    <table>
+        <caption>Users</caption>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{user.username}}</td>
+                    <td>{{user.first_name}}</td>
+                    <td>{{user.last_name}}</td>
+                    <td>{{user.email}}</td>
+                    <td></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <table>
+        <caption>Help</caption>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Detail</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for help in helps %}
+                <tr>
+                    <td>{{help.username}}</td>
+                    <td>{{help.detail}}</td>
+                    <td></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
