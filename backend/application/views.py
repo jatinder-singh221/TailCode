@@ -1,4 +1,3 @@
-from msilib.schema import Component
 from django.views.generic import  View
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login,logout
